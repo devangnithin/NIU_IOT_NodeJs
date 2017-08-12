@@ -25,5 +25,5 @@ var serverFunction = function (req, res) {
 };
 
 var server = http.createServer(serverFunction);
-server.listen(properties.get('main.application.port'));
+server.listen(process.env.PORT || properties.get('main.application.port'));
 console.log("server started");
