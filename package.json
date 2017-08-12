@@ -1,0 +1,28 @@
+{
+  "name": "niubridge",
+  "version": "1.0.0",
+  "description": "This is the cental controlling application where all other sensors and applications connect to.",
+  "main": "mainServer.js",
+  "dependencies": {
+    "dateformat": "^2.0.0",
+    "elasticsearch": "^13.3.1",
+    "fft-js": "^0.0.11",
+    "nodemailer": "^4.0.1",
+    "properties-reader": "^0.0.15",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devangnithin/NIU_IOT_NodeJs.git"
+  },
+  "author": "Nithin Devang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devangnithin/NIU_IOT_NodeJs/issues"
+  },
+  "homepage": "https://github.com/devangnithin/NIU_IOT_NodeJs#readme"
+}
