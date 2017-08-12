@@ -1,8 +1,10 @@
 var events = require('events');
 var elasticsearch = require('elasticsearch')
 var dateFormat = require('dateformat');
-var eventEmitter;// = new events.EventEmitter();
+var PropertiesReader = require('properties-reader');
 
+var properties = PropertiesReader('application.properties');
+var eventEmitter;// = new events.EventEmitter();
 var nodemailer = require('nodemailer');
 
 var x1_thresh = 0;
@@ -22,35 +24,35 @@ var last_date = "2016-08-11 00:00:00.000";
 
 var client = new elasticsearch.Client(
     {
-        host: 'localhost:9200',
+        host: properties.get('elasticsearch.base.url') + ":" + properties.get('elasticsearch.base.port'),
         //log: 'trace'
     }
 );
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: properties.get('alert.service.name'),
     auth: {
-        user: 'dvng4u@gmail.com',
-        pass: 'dummy'
+        user: properties.get('alert.user.email'),
+        pass: properties.get('alert.user.password')
     }
 });
 
 
 var sendMail = function (to, subject, message) {
     var mailOptions = {
-        from: 'dvng4u@gmail.com',
-        to: to,
+        from: properties.get('alert.user.email'),
+        to: properties.get('alert.user.to'),
         subject: subject,
         text: message
     };
 
-    /*transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
         } else {
             //console.log('Email sent: ' + info.response);
         }
-    });*/
+    });
 }
 
 var sendAlert = function (accelId, dataArray) {

@@ -1,10 +1,12 @@
 var url = require('url');
 var request = require('request');
 var elasticsearch = require('elasticsearch');
+var PropertiesReader = require('properties-reader');
 
+var properties = PropertiesReader('application.properties');
 var client = new elasticsearch.Client(
     {
-        host: 'localhost:9200',
+        host: properties.get('elasticsearch.base.url') + ":" + properties.get('elasticsearch.base.port'),
         //log: 'trace'
     }
 );
@@ -27,7 +29,7 @@ exports.thresholdRequest = function (req, res) {
             }
 
             request({
-                uri: "http://localhost:9200/threshold/threshold/1",
+                uri: properties.get('elasticsearch.base.url') + ":" + properties.get('elasticsearch.base.port') + "/threshold/threshold/1",
                 method: "POST",
                 json: body
             }, function (error, elRes) {
@@ -55,7 +57,7 @@ exports.thresholdRequest = function (req, res) {
                     //console.log(response.hits.hits[0]._source.x1_thresh);
                     //var thresh = []
                     res.writeHead(200, {'Content-Type': 'application/json'});
-                    res.end(response.hits.hits[0]._source);
+                    res.end(JSON.stringify(response.hits.hits[0]._source));
                     //res.end();
                 }
             }

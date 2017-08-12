@@ -2,11 +2,13 @@ var events = require('events');
 var elasticsearch = require('elasticsearch')
 var fft = require('fft-js').fft;
 var fftUtil = require('fft-js').util;
+var PropertiesReader = require('properties-reader');
 
+var properties = PropertiesReader('application.properties');
 var eventEmitter;// = new events.EventEmitter();
 var client = new elasticsearch.Client(
     {
-        host: 'localhost:9200',
+        host: properties.get('elasticsearch.base.url') + ":" + properties.get('elasticsearch.base.port'),
         //log: 'trace'
     }
 );
