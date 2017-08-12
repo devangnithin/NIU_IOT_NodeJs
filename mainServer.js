@@ -8,13 +8,8 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
 
-//el.startElasticService(eventEmitter);
-//alert.alertService(eventEmitter);
-
-//check if threshold crossed
-
-
-
+el.startElasticService(eventEmitter);
+alert.alertService(eventEmitter);
 
 var serverFunction = function (req, res) {
 
