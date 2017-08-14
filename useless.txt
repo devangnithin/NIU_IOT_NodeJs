@@ -1,0 +1,11 @@
+ "_source": {
+                    "x1_thresh": 6,
+                    "y1_thresh": 4,
+                    "z1_thresh": 6,
+                    "x2_thresh": 3,
+                    "y2_thresh": 5,
+                    "z2_thresh": 7,
+                    "x3_thresh": 8,
+                    "y3_thresh": 9,
+                    "z3_thresh": 10
+                }
