@@ -112,8 +112,8 @@ var startSearch = function (accelId) {
                 },
                 "size": 2048
             } //body end
-        }, function (err, response) {
-            if (err) {
+        }, function (error, response) {
+            if (error) {
                 //console.log(err);
                 var message = "Error in elasticSearchClient.js: startSearch while deleting \n\n\n" + error.stack;
                 eventEmitter.emit('mailRequest', 'dvng4u@gmail.com', 'Unable to startSearch : accel  ' +accelId , message);
