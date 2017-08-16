@@ -1,7 +1,5 @@
 var events = require('events');
 var elasticsearch = require('elasticsearch')
-var fft = require('fft-js').fft;
-var fftUtil = require('fft-js').util;
 var PropertiesReader = require('properties-reader');
 
 var properties = PropertiesReader('application.properties');
@@ -48,6 +46,8 @@ var buildDoc = function (fourierDataRaw, accelId, axisId) {
 
 
 var processElastiResponse = function (response, accelId) {
+    var fft = require('fft-js').fft;
+    var fftUtil = require('fft-js').util;
 
     client.deleteByQuery({
         index: 'fourier',
@@ -82,7 +82,10 @@ var processElastiResponse = function (response, accelId) {
     signal.push(zSignal);
 
     for (var i = 0; i < 3; i++) {
-
+        if (signal[i].length < 2048) {
+            console.log("No enough data to build fourier");
+            continue;
+        }
         var phasors = fft(signal[i]);
         var frequencies = fftUtil.fftFreq(phasors, 2048);
         var magnitudes = fftUtil.fftMag(phasors);
@@ -130,10 +133,10 @@ var start = function () {
     console.log('emiting elasticConnected');
     eventEmitter.emit('elasticConnected', 1);
     eventEmitter.emit('elasticConnected', 2);
-    eventEmitter.emit('elasticConnected', 3);
+    //eventEmitter.emit('elasticConnected', 3);
     setTimeout(function () {
         start();
-    }, 60000);
+    }, 30000);
 }
 
 exports.startElasticService = function (eventEmitterRecv) {
