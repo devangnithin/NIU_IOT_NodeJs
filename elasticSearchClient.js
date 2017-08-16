@@ -83,7 +83,7 @@ var processElastiResponse = function (response, accelId) {
 
     for (var i = 0; i < 3; i++) {
         if (signal[i].length < 2048) {
-            console.log("No enough data to build fourier");
+            console.log("No enough data to build fourier: size is " + signal[i].length);
             continue;
         }
         var phasors = fft(signal[i]);
@@ -133,7 +133,7 @@ var start = function () {
     console.log('emiting elasticConnected');
     eventEmitter.emit('elasticConnected', 1);
     eventEmitter.emit('elasticConnected', 2);
-    //eventEmitter.emit('elasticConnected', 3);
+    eventEmitter.emit('elasticConnected', 3);
     setTimeout(function () {
         start();
     }, 30000);
