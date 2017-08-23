@@ -32,7 +32,7 @@ var insertTimeSeries = function (timeSeriesData, res) {
     }, function (error, response) {
         if (error) {
             res.writeHead(400, {'Content-Type': 'text/plain'});
-            res.end( "Error in elasticSearchClient.js: insertTimeseries \n\n\n" + error.stack);
+            res.end("Error in elasticSearchClient.js: insertTimeseries \n\n\n" + error.stack);
         }
         //else console.log("written");
     });
@@ -52,15 +52,15 @@ exports.accelPush = function (req, res) {
             var body = null;
             try {
                 body = JSON.parse(reqBody);
-                if(count < 2) {
+                if (count < 1000) {
                     requestArray.push(body);
-                    count = count +1;
+                    count = count + 1;
                 } else {
                     insertTimeSeries(buildDoc(requestArray), res);
                     count = 0;
                 }
-                res.writeHead(400, {'Content-Type': 'text/json'});
-                res.end("{Done} " + reqUrl.pathname);
+                res.writeHead(200, {'Content-Type': 'application/json'});
+                res.end("{'Done' :'" + reqUrl.pathname + "'}");
             }
             catch (e) {
                 res.writeHead(400, {'Content-Type': 'text/plain'});
@@ -71,7 +71,7 @@ exports.accelPush = function (req, res) {
 
     }
     else {
-        res.writeHead(400, {'Content-Type': 'text/json'});
+        res.writeHead(400, {'Content-Type': 'application/json'});
         res.end("BAd Request " + reqUrl.pathname);
     }
     return;
