@@ -20,7 +20,8 @@ var buildDoc = function (jsonReqDataArray) {
             accel_id: jsonReqData.accel_id,
             x_val: jsonReqData.x_val,
             y_val: jsonReqData.y_val,
-            z_val: jsonReqData.z_val
+            z_val: jsonReqData.z_val,
+            post_date: jsonReqData.post_date
         });
     });
     return docArray;
@@ -52,15 +53,17 @@ exports.accelPush = function (req, res) {
             var body = null;
             try {
                 body = JSON.parse(reqBody);
-                if (count < 1000) {
+                if (count < 10000) {
                     requestArray.push(body);
                     count = count + 1;
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    res.end("{'data_queue' :'" + reqUrl.pathname + "'}");
                 } else {
                     insertTimeSeries(buildDoc(requestArray), res);
                     count = 0;
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    res.end("{'data_pushed_to_elastic' :'" + reqUrl.pathname + "'}");
                 }
-                res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end("{'Done' :'" + reqUrl.pathname + "'}");
             }
             catch (e) {
                 res.writeHead(400, {'Content-Type': 'text/plain'});
