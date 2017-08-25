@@ -53,6 +53,7 @@ exports.accelPush = function (req, res) {
             var body = null;
             try {
                 body = JSON.parse(reqBody);
+                console.log(reqBody);
                 if (count < 1000) {
                     requestArray.push(body);
                     count = count + 1;
