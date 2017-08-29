@@ -57,14 +57,14 @@ exports.accelPush = function (req, res) {
                 if (count < 1000) {
                     requestArray.push(body);
                     count = count + 1;
-                    Console.log("data_queued' :'" + reqUrl.pathname );
+                    console.log("data_queued' :'" + reqUrl.pathname );
                     res.writeHead(200, {'Content-Type': 'application/json'});
                     res.end("{'data_queue' :'" + reqUrl.pathname + "'}" + count);
                 } else {
                     insertTimeSeries(buildDoc(requestArray), res);
                     count = 0;
                     res.writeHead(200, {'Content-Type': 'application/json'});
-                    Console.log("data_pushed_to_elastic' :'" + reqUrl.pathname );
+                    console.log("data_pushed_to_elastic' :'" + reqUrl.pathname );
                     res.end("{'data_pushed_to_elastic' :'" + reqUrl.pathname + "'}");
                 }
             }
