@@ -70,7 +70,7 @@ exports.accelPush = function (req, res) {
             }
             catch (e) {
                 res.writeHead(400, {'Content-Type': 'text/plain'});
-                res.end("Unable To Process : JSON FOrmat Error");
+                res.end("Unable To Process : JSON FOrmat Error " + reqBody);
             }
 
         });
