@@ -1,0 +1,16 @@
+POST accelerometer/accel/_search
+{
+  "query": {
+    "match": {
+      "accel_id": 1
+      }
+    },
+    "sort": {
+      "post_date": {
+        "order": "desc"
+        }
+    },
+    "size": 2048
+}
+
+

@@ -53,24 +53,25 @@ exports.accelPush = function (req, res) {
             var body = null;
             try {
                 body = JSON.parse(reqBody);
-                console.log(reqBody);
+                //console.log(reqBody);
                 if (count < 1000) {
                     requestArray.push(body);
                     count = count + 1;
-                    Console.log("data_queued' :'" + reqUrl.pathname );
+                    console.log("data_queued' :'" + reqUrl.pathname );
                     res.writeHead(200, {'Content-Type': 'application/json'});
-                    res.end("{'data_queue' :'" + reqUrl.pathname + "'}" + count);
+                    res.end("{'data_queue' :'" + reqUrl.pathname + "', count: "+count+"}");
                 } else {
                     insertTimeSeries(buildDoc(requestArray), res);
                     count = 0;
                     res.writeHead(200, {'Content-Type': 'application/json'});
-                    Console.log("data_pushed_to_elastic' :'" + reqUrl.pathname );
+                    console.log("data_pushed_to_elastic' :'" + reqUrl.pathname );
                     res.end("{'data_pushed_to_elastic' :'" + reqUrl.pathname + "'}");
                 }
             }
             catch (e) {
                 res.writeHead(400, {'Content-Type': 'text/plain'});
-                res.end("Unable To Process : JSON FOrmat Error");
+                res.end("Unable To Process : JSON FOrmat Error " + reqBody);
+                console.log(e);
             }
 
         });
