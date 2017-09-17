@@ -8,10 +8,12 @@
     "elasticsearch": "^13.3.1",
     "express": "^4.15.4",
     "fft-js": "^0.0.11",
+    "http": "0.0.0",
     "http-proxy": "^1.16.2",
-    "nodemailer": "^4.0.1",
-    "properties-reader": "^0.0.15",
-    "request": "^2.81.0"
+    "nodemailer": "^4.1.0",
+    "properties-reader": "0.0.15",
+    "request": "^2.81.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.17.4"

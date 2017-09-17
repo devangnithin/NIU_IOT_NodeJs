@@ -1,0 +1,5 @@
+
+(java:19902): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
+
+(java:19902): Gtk-WARNING **: Unable to locate theme engine in module_path: "adwaita",
+WARN: Can't load NodeJS: since build 172.3968 does not match IU-172.3757.52
